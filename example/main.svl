@@ -1,0 +1,51 @@
+import io
+
+function main($args)
+{
+	//init varible
+	$resultCode = 0;
+	//call function from io lib
+	print("hello, world);
+
+	//open file
+	$srcFile = fopen("source_file");
+	$dstFile = fopen("destination file");
+
+	for($i = 0; $i < 0; $i++)
+	{
+		read($srcFile, $buffer);
+		write($dstFile, $buffer);
+	}
+
+	//Init boolean var
+	$conditionVal = true;
+	while($conditionValue)
+	{
+		if( rand() % 10 > 5 )
+			$conditionValue = false;
+		print(".");
+	}
+
+	//string concetate
+	$srcString = "hello";
+	$dstString = srcString .", world!\n";
+	
+	//string size
+	$dstString.length;
+	
+	$size = 1024;
+	//dynamic resized array
+	$someArray = array[$size];
+	//or without size
+	$someArray = array[];	
+
+
+	// Singleline comment
+
+	/* 
+		Multiline comment 
+	*/
+
+	//return statement
+	return $resultCode;
+}
