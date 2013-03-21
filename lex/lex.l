@@ -1,7 +1,6 @@
 %{
 #include <stdio.h>
 #include <string.h>
-
 char * filename;
 %}
 
@@ -15,33 +14,40 @@ digit [0-9]
 
 %%
 
-def {
-	printf("DEF\n");
+"function" {
+	printf("FUNCTION\n");
 }
 
-while {
+"while" {
 	printf("WHILE\n");
 }
 
-do {
-	printf("DO\n");
+
+"$" {
+	printf("VAR_BEGIN\n");
 }
 
-var {
-	printf("VAR\n");
-}
-
-if {
+"if" {
 	printf("IF\n");
 }
 
-else {
+"else" {
 	printf("ELSE\n");
 }
 
+"for" {
+	printf("FOR\n");
+}
+
+array[{digit}*] {
+	printf("AARRAY INITIALIZATION\n");
+}
+
+
 ({letter})* {
 	printf("IDENTIFIER\n");
-} 
+}
+ 
 
 {digit}+ {
 	printf("NUMBER\n");
@@ -124,23 +130,29 @@ else {
 	printf("CLOSE BRACKET\n");
 }
 
+"." { 
+	printf("STRING CONCETATE\n");
+}
+
 %%
 int main (int argc, char** argv) {
 	if (argc < 2)
 	{
 		perror("There is no input file\n");
-	return 1;
+	return -1;
 	}
 
 	yyin = fopen(argv[1], "r");
 	if (yyin == NULL)
 	{
 		perror(argv[1]);
-		return 1;
+		return -2;
 	}
+
 	filename = strdup(argv[1]);
 	yylineno = 1;																																							
 	yylex();
+
 	return 0;
 }
 
