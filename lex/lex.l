@@ -14,6 +14,10 @@ digit [0-9]
 
 %%
 
+"import" {
+	printf("IMPORT\n");
+}
+
 "function" {
 	printf("FUNCTION\n");
 }
@@ -40,7 +44,7 @@ digit [0-9]
 }
 
 array[{digit}*] {
-	printf("AARRAY INITIALIZATION\n");
+	printf("ARRAY INITIALIZATION\n");
 }
 
 
@@ -67,7 +71,7 @@ array[{digit}*] {
 }
 
 ";" {
-	printf("END OF THE LINE\n");
+	printf("END OF THE INSTRUCTION\n");
 }
 
 "+" {
