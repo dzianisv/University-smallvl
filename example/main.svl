@@ -28,7 +28,7 @@ function main($args)
 
 	//string concetate
 	$srcString = "hello";
-	$dstString = srcString + ", world!\n";
+	$dstString = srcString .", world!\n";
 	
 	//string size
 	strlen($dstString);
