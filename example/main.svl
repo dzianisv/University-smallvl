@@ -31,7 +31,7 @@ function main($args)
 	$dstString = srcString .", world!\n";
 	
 	//string size
-	$dstString.length;
+	strlen($dstString);
 	
 	$size = 1024;
 	//dynamic resized array
