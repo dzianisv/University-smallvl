@@ -11,6 +11,7 @@ int yycolumn = 0;
 %option stack
 %x SINGLE_LINE_COMMENT
 %x MULTI_LINE_COMMENT
+%x STRING_DEFINITION
 
 letter [a-zA-Z]
 digit [0-9]
@@ -70,7 +71,14 @@ array[{digit}*] {
 	printf("NUMBER\n");
 }
 
-"//"			yy_push_state(SINGLE_LINE_COMMENT);
+\".*\"			{
+	LINE;
+	printf("STRING_DEFINITION\n");
+}
+
+
+
+"//"	yy_push_state(SINGLE_LINE_COMMENT);
 <SINGLE_LINE_COMMENT>{
 	[^\n]*	|
 	"\n"	{
@@ -89,6 +97,12 @@ array[{digit}*] {
 ";" {
 	LINE;
 	printf("END OF THE INSTRUCTION\n");
+}
+
+,
+ {
+	LINE;
+	printf("ARG_SPLITTER\n");
 }
 
 "+" {

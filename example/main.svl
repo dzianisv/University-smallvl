@@ -5,7 +5,7 @@ function main($args)
 	//init varible
 	$resultCode = 0;
 	//call function from io lib
-	print("hello, world");
+	print("\"hello, world\n");
 
 	//open file
 	$srcFile = fopen("source_file");
@@ -28,7 +28,7 @@ function main($args)
 
 	//string concetate
 	$srcString = "hello";
-	$dstString = srcString .", world!\n";
+	$dstString = srcString .", world!";
 	
 	//string size
 	strlen($dstString);
