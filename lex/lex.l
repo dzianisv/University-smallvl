@@ -56,7 +56,7 @@ digit [0-9]
 
 array[{digit}*] {
 	LINE;
-	printf("ARRAY INITIALIZATION\n");
+	printf("ARRAY_INITIALIZATION\n");
 }
 
 
@@ -96,7 +96,7 @@ array[{digit}*] {
 
 ";" {
 	LINE;
-	printf("END OF THE INSTRUCTION\n");
+	printf("END_OF_THE_INSTRUCTION\n");
 }
 
 ,
@@ -142,12 +142,12 @@ array[{digit}*] {
 
 ">=" {
 	LINE;
-	printf("MORE OR EQUAL\n");
+	printf("MORE_OR_EQUAL\n");
 }
 
 "<=" {
 	LINE;
-	printf("LESS OR EQUAL\n");
+	printf("LESS_OR_EQUAL\n");
 }
 
 "==" {
@@ -157,32 +157,32 @@ array[{digit}*] {
 
 "!=" {
 	LINE;
-	printf("NOT EQUAL\n");
+	printf("NOT_EQUAL\n");
 }
 
 "{" {
 	LINE;
-	printf("OPEN BLOCK\n");
+	printf("OPEN_BLOCK\n");
 }
 
 "}" {
 	LINE;
-	printf("CLOSE BLOCK\n");
+	printf("CLOSE_BLOCK\n");
 }
 
 "(" {
 	LINE;
-	printf("OPEN BRACKET\n");
+	printf("OPEN_BRACKET\n");
 }
 
 ")" {
 	LINE;
-	printf("CLOSE BRACKET\n");
+	printf("CLOSE_BRACKET\n");
 }
 
 "." {
 	LINE;
-	printf("STRING CONCETATE\n");
+	printf("STRING_CONCETATE\n");
 }
 
 . {

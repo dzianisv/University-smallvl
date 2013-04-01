@@ -1,0 +1,143 @@
+﻿main.svl:1:0    import  IMPORT
+main.svl:1:7    io      IDENTIFIER
+main.svl:3:1    function        FUNCTION
+main.svl:3:10   main    IDENTIFIER
+main.svl:3:14   (       OPEN BRACKET
+main.svl:3:15   $       VAR_BEGIN
+main.svl:3:16   args    IDENTIFIER
+main.svl:3:20   )       CLOSE BRACKET
+main.svl:4:1    {       OPEN BLOCK
+main.svl:6:2    $       VAR_BEGIN
+main.svl:6:3    resultCode      IDENTIFIER
+main.svl:6:14   =       ASSIGN
+main.svl:6:16   0       NUMBER
+main.svl:6:17   ;       END_OF_THE_INSTRUCTION
+main.svl:8:2    print   IDENTIFIER
+main.svl:8:7    (       OPEN BRACKET
+main.svl:8:8    "\"hello, world\n"      STRING_DEFINITION
+main.svl:8:26   )       CLOSE BRACKET
+main.svl:8:27   ;       END_OF_THE_INSTRUCTION
+main.svl:11:2   $       VAR_BEGIN
+main.svl:11:3   srcFile IDENTIFIER
+main.svl:11:11  =       ASSIGN
+main.svl:11:13  fopen   IDENTIFIER
+main.svl:11:18  (       OPEN BRACKET
+main.svl:11:19  "source_file"   STRING_DEFINITION
+main.svl:11:32  )       CLOSE BRACKET
+main.svl:11:33  ;       END_OF_THE_INSTRUCTION
+main.svl:12:2   $       VAR_BEGIN
+main.svl:12:3   dstFile IDENTIFIER
+main.svl:12:11  =       ASSIGN
+main.svl:12:13  fopen   IDENTIFIER
+main.svl:12:18  (       OPEN BRACKET
+main.svl:12:19  "destination file"      STRING_DEFINITION
+main.svl:12:37  )       CLOSE BRACKET
+main.svl:12:38  ;       END_OF_THE_INSTRUCTION
+main.svl:14:2   for     FOR
+main.svl:14:5   (       OPEN BRACKET
+main.svl:14:6   $       VAR_BEGIN
+main.svl:14:7   i       IDENTIFIER
+main.svl:14:9   =       ASSIGN
+main.svl:14:11  0       NUMBER
+main.svl:14:12  ;       END_OF_THE_INSTRUCTION
+main.svl:14:14  $       VAR_BEGIN
+main.svl:14:15  i       IDENTIFIER
+main.svl:14:17  <       LESS
+main.svl:14:19  0       NUMBER
+main.svl:14:20  ;       END_OF_THE_INSTRUCTION
+main.svl:14:22  $       VAR_BEGIN
+main.svl:14:23  i       IDENTIFIER
+main.svl:14:24  +       PLUS
+main.svl:14:25  +       PLUS
+main.svl:14:26  )       CLOSE BRACKET
+main.svl:15:2   {       OPEN BLOCK
+main.svl:16:3   read    IDENTIFIER
+main.svl:16:7   (       OPEN BRACKET
+main.svl:16:8   $       VAR_BEGIN
+main.svl:16:9   srcFile IDENTIFIER
+main.svl:16:17  $       VAR_BEGIN
+main.svl:16:18  buffer  IDENTIFIER
+main.svl:16:24  )       CLOSE BRACKET
+main.svl:16:25  ;       END_OF_THE_INSTRUCTION
+main.svl:17:3   write   IDENTIFIER
+main.svl:17:8   (       OPEN BRACKET
+main.svl:17:9   $       VAR_BEGIN
+main.svl:17:10  dstFile IDENTIFIER
+main.svl:17:18  $       VAR_BEGIN
+main.svl:17:19  buffer  IDENTIFIER
+main.svl:17:25  )       CLOSE BRACKET
+main.svl:17:26  ;       END_OF_THE_INSTRUCTION
+main.svl:18:2   }       CLOSE BLOCK
+main.svl:21:2   $       VAR_BEGIN
+main.svl:21:3   conditionVal    IDENTIFIER
+main.svl:21:16  =       ASSIGN
+main.svl:21:18  true    IDENTIFIER
+main.svl:21:22  ;       END_OF_THE_INSTRUCTION
+main.svl:22:2   while   WHILE
+main.svl:22:7   (       OPEN BRACKET
+main.svl:22:8   $       VAR_BEGIN
+main.svl:22:9   conditionValue  IDENTIFIER
+main.svl:22:23  )       CLOSE BRACKET
+main.svl:23:2   {       OPEN BLOCK
+main.svl:24:3   if      IF
+main.svl:24:5   (       OPEN BRACKET
+main.svl:24:7   rand    IDENTIFIER
+main.svl:24:11  (       OPEN BRACKET
+main.svl:24:12  )       CLOSE BRACKET
+main.svl:24:16  10      NUMBER
+main.svl:24:19  >       MORE
+main.svl:24:21  5       NUMBER
+main.svl:24:23  )       CLOSE BRACKET
+main.svl:25:4   $       VAR_BEGIN
+main.svl:25:5   conditionValue  IDENTIFIER
+main.svl:25:20  =       ASSIGN
+main.svl:25:22  false   IDENTIFIER
+main.svl:25:27  ;       END_OF_THE_INSTRUCTION
+main.svl:26:3   print   IDENTIFIER
+main.svl:26:8   (       OPEN BRACKET
+main.svl:26:9   "."     STRING_DEFINITION
+main.svl:26:12  )       CLOSE BRACKET
+main.svl:26:13  ;       END_OF_THE_INSTRUCTION
+main.svl:27:2   }       CLOSE BLOCK
+main.svl:30:2   $       VAR_BEGIN
+main.svl:30:3   srcString       IDENTIFIER
+main.svl:30:13  =       ASSIGN
+main.svl:30:15  "hello" STRING_DEFINITION
+main.svl:30:22  ;       END_OF_THE_INSTRUCTION
+main.svl:31:2   $       VAR_BEGIN
+main.svl:31:3   dstString       IDENTIFIER
+main.svl:31:13  =       ASSIGN
+main.svl:31:15  srcString       IDENTIFIER
+main.svl:31:25  .       STRING CONCETATE
+main.svl:31:26  ", world!"      STRING_DEFINITION
+main.svl:31:36  ;       END_OF_THE_INSTRUCTION
+main.svl:34:2   strlen  IDENTIFIER
+main.svl:34:8   (       OPEN BRACKET
+main.svl:34:9   $       VAR_BEGIN
+main.svl:34:10  dstString       IDENTIFIER
+main.svl:34:19  )       CLOSE BRACKET
+main.svl:34:20  ;       END_OF_THE_INSTRUCTION
+main.svl:36:2   $       VAR_BEGIN
+main.svl:36:3   size    IDENTIFIER
+main.svl:36:8   =       ASSIGN
+main.svl:36:10  1024    NUMBER
+main.svl:36:14  ;       END_OF_THE_INSTRUCTION
+main.svl:38:2   $       VAR_BEGIN
+main.svl:38:3   someArray       IDENTIFIER
+main.svl:38:13  =       ASSIGN
+main.svl:38:15  array   IDENTIFIER
+main.svl:38:21  $       VAR_BEGIN
+main.svl:38:22  size    IDENTIFIER
+main.svl:38:27  ;       END_OF_THE_INSTRUCTION
+main.svl:40:2   $       VAR_BEGIN
+main.svl:40:3   someArray       IDENTIFIER
+main.svl:40:13  =       ASSIGN
+main.svl:40:15  array   IDENTIFIER
+main.svl:40:22  ;       END_OF_THE_INSTRUCTION
+main.svl:47:2   *       MULTIPLY
+main.svl:47:3   /       DIVIDE
+main.svl:50:2   return  IDENTIFIER
+main.svl:50:9   $       VAR_BEGIN
+main.svl:50:10  resultCode      IDENTIFIER
+main.svl:50:20  ;       END_OF_THE_INSTRUCTION
+main.svl:51:1   }       CLOSE BLOCK
