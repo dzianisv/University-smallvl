@@ -71,7 +71,7 @@ array[{digit}*] {
 	printf("NUMBER\n");
 }
 
-\".*\"			{
+\"([^"]|\\\")*\"			{
 	LINE;
 	printf("STRING_DEFINITION\n");
 }
