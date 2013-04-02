@@ -1,10 +1,7 @@
 %{
 #include <stdio.h>
 #include <string.h>
-char * filename;
-int yycolumn = 0;
-
-#define LINE printf("%s:%d:%d \t%s\t", filename, yylineno, yycolumn, yytext); yycolumn+=yyleng;
+#include "bison.tab.h"
 %}
 
 %option yylineno
@@ -18,62 +15,59 @@ digit [0-9]
 
 %%
 
-"import" {
-	LINE;
-	printf("IMPORT\n");
+"include" {
+		return INCLUDE;
+}
+
+"require"  {
+	return REQUIRE;
+}
+
+"return"  {
+	return RETURN;
 }
 
 "function" {
-	LINE;
-	printf("FUNCTION\n");
+	return FUNCTION;
 }
 
 "while" {
-	LINE;
-	printf("WHILE\n");
+	return WHILE;
 }
 
 
 "$" {
-	LINE;
-	printf("VAR_BEGIN\n");
+	return VAR_BEGIN;
 }
 
 "if" {
-	LINE;
-	printf("IF\n");
+	return IF;
 }
 
 "else" {
-	LINE;
-	printf("ELSE\n");
+	return ELSE;
 }
 
 "for" {
-	LINE;
-	printf("FOR\n");
+	return FOR;
 }
 
-array[{digit}*] {
-	LINE;
-	printf("ARRAY_INITIALIZATION\n");
+array({digit}*) {
+	
 }
 
 
 ({letter})* {
-	LINE;
-	printf("IDENTIFIER\n");
+	return IDENTIFIER;
 }
  
 
 {digit}+ {
-	LINE;
-	printf("NUMBER\n");
+	return NUMBER:
 }
 
 \"([^"]|\\\")*\"			{
-	LINE;
-	printf("STRING_DEFINITION\n");
+	return STRING_DEFINITION;
 }
 
 
@@ -95,94 +89,76 @@ array[{digit}*] {
 }
 
 ";" {
-	LINE;
-	printf("END_OF_THE_INSTRUCTION\n");
+	return INSTRUCTION_END;
 }
 
 ,
  {
-	LINE;
-	printf("ARG_SPLITTER\n");
+	return ARG_SPLITTER;
 }
 
 "+" {
-	LINE;
-	printf("PLUS\n");
+	return  PLUS;
 }
 
 "-" {
-	LINE;
-	printf("MINUS\n");
+	return MINUS;
 }
 
 "/" {
-	LINE;
-	printf("DIVIDE\n");
+	return DIVIDE;
 }
 
 "*" {
-	LINE;
-	printf("MULTIPLY\n");
+	return MULTIPLY;
 }
 
 "=" {
-	LINE;
-	printf("ASSIGN\n");
+	return ASSIGN;
 }
 
 ">" {
-	LINE;
-	printf("MORE\n");
+	return MORE;
 }
 
 "<" {
-	LINE;
-	printf("LESS\n");
+	return LESS;
 }
 
 ">=" {
-	LINE;
-	printf("MORE_OR_EQUAL\n");
+	return MORE_OR_EQUAL;
 }
 
 "<=" {
-	LINE;
-	printf("LESS_OR_EQUAL\n");
+	return LESS_OR_EQUAL;
 }
 
 "==" {
-	LINE;
-	printf("EQUAL\n");
+	return EQUAL;
 }
 
 "!=" {
-	LINE;
-	printf("NOT_EQUAL\n");
+	return NOT_EQUAL;
 }
 
 "{" {
-	LINE;
-	printf("OPEN_BLOCK\n");
+	return OPEN_BLOCK;
 }
 
 "}" {
-	LINE;
-	printf("CLOSE_BLOCK\n");
+	return CLOSE_BLOCK;
 }
 
 "(" {
-	LINE;
-	printf("OPEN_BRACKET\n");
+	return OPEN_BRACKET;
 }
 
 ")" {
-	LINE;
-	printf("CLOSE_BRACKET\n");
+	return CLOSE_BRACKET;
 }
 
 "." {
-	LINE;
-	printf("STRING_CONCETATE\n");
+	return STRING_CONCETATE;
 }
 
 . {
@@ -194,25 +170,6 @@ array[{digit}*] {
 }
 
 %%
-int main (int argc, char** argv) {
-	if (argc < 2)
-	{
-		perror("There is no input file\n");
-	return -1;
-	}
 
-	yyin = fopen(argv[1], "r");
-	if (yyin == NULL)
-	{
-		perror(argv[1]);
-		return -2;
-	}
-
-	filename = strdup(argv[1]);
-	yylineno = 1;																																			
-	yylex();
-
-	return 0;
-}
 
 

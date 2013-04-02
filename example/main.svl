@@ -1,4 +1,4 @@
-import io
+include ""
 
 function main($args)
 {
