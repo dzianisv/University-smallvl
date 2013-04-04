@@ -1,3 +1,4 @@
+*.exe
 *.o
 lex_analizator
 syn_analizator

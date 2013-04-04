@@ -93,8 +93,7 @@ array({digit}*) {
 	return END_INSTRUCTION;
 }
 
-,
- {
+"," {
 	return ARG_SPLITTER;
 }
 

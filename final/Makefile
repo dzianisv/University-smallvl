@@ -1,2 +1,2 @@
 all:
-	$(CC) lex.yy.c bison.tab.c main.c -o final
+	$(CC) main.c lex.yy.c bison.tab.c  -o final
