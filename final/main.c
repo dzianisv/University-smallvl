@@ -8,7 +8,7 @@ int main (int argc, char** argv) {
 		return 1;
 	}
 
-	char* filename = strdup(argv[1]);																																					
+	yyin = fopen(argv[1], "r");	
 	yyparse();
 	return 0;
 }

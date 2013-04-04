@@ -78,8 +78,9 @@ int yywrap()
         return 1;
 } 
 
+
 /* Line 371 of yacc.c  */
-#line 89 "bison.tab.c"
+#line 84 "bison.tab.c"
 
 # ifndef YY_NULL
 #  if defined __cplusplus && 201103L <= __cplusplus
@@ -179,7 +180,7 @@ int yyparse ();
 /* Copy the second part of user declarations.  */
 
 /* Line 390 of yacc.c  */
-#line 189 "bison.tab.c"
+#line 184 "bison.tab.c"
 
 #ifdef short
 # undef short
@@ -479,9 +480,9 @@ static const yytype_int8 yyrhs[] =
 /* YYRLINE[YYN] -- source line where rule number YYN was defined.  */
 static const yytype_uint8 yyrline[] =
 {
-       0,    28,    28,    29,    33,    36,    37,    38,    42,    44,
-      46,    48,    52,    54,    58,    60,    62,    64,    66,    68,
-      70,    72,    75,    78,    85,    92,    99,   105,   112,   119
+       0,    23,    23,    24,    28,    31,    32,    33,    37,    39,
+      41,    43,    47,    49,    53,    55,    57,    59,    61,    63,
+      65,    67,    70,    73,    80,    87,    94,   100,   107,   114
 };
 #endif
 
@@ -1415,7 +1416,7 @@ yyreduce:
     {
         case 23:
 /* Line 1792 of yacc.c  */
-#line 79 "bison.y"
+#line 74 "bison.y"
     {
                 printf("функция %s\n", (yyvsp[(2) - (5)]));
         }
@@ -1423,7 +1424,7 @@ yyreduce:
 
   case 24:
 /* Line 1792 of yacc.c  */
-#line 86 "bison.y"
+#line 81 "bison.y"
     {
                 printf("Вызов функции %s\n", (yyvsp[(1) - (5)]));
         }
@@ -1431,7 +1432,7 @@ yyreduce:
 
   case 25:
 /* Line 1792 of yacc.c  */
-#line 93 "bison.y"
+#line 88 "bison.y"
     {
                 printf("Присвоение значения переменной\n");
         }
@@ -1439,7 +1440,7 @@ yyreduce:
 
   case 26:
 /* Line 1792 of yacc.c  */
-#line 100 "bison.y"
+#line 95 "bison.y"
     {
                 printf("Конкатенация строк\n");
         }
@@ -1447,7 +1448,7 @@ yyreduce:
 
   case 27:
 /* Line 1792 of yacc.c  */
-#line 106 "bison.y"
+#line 101 "bison.y"
     {
                 printf("возврат значения из функции\n");
         }
@@ -1455,7 +1456,7 @@ yyreduce:
 
   case 28:
 /* Line 1792 of yacc.c  */
-#line 113 "bison.y"
+#line 108 "bison.y"
     {
 				printf("Цикл for\n");
 		}
@@ -1463,7 +1464,7 @@ yyreduce:
 
   case 29:
 /* Line 1792 of yacc.c  */
-#line 120 "bison.y"
+#line 115 "bison.y"
     {
 				printf("%s", (yyvsp[(2) - (2)]));
 		}
@@ -1471,7 +1472,7 @@ yyreduce:
 
 
 /* Line 1792 of yacc.c  */
-#line 1481 "bison.tab.c"
+#line 1476 "bison.tab.c"
       default: break;
     }
   /* User semantic actions sometimes alter yychar, and that requires
