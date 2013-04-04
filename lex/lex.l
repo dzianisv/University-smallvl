@@ -2,6 +2,7 @@
 #include <stdio.h>
 #include <string.h>
 #include "bison.tab.h"
+int yycolumn = 0;
 %}
 
 %option yylineno
@@ -63,7 +64,7 @@ array({digit}*) {
  
 
 {digit}+ {
-	return NUMBER:
+	return NUMBER;
 }
 
 \"([^"]|\\\")*\"			{
@@ -89,7 +90,7 @@ array({digit}*) {
 }
 
 ";" {
-	return INSTRUCTION_END;
+	return END_INSTRUCTION;
 }
 
 ,

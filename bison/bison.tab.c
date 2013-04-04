@@ -86,7 +86,7 @@ int yywrap()
 main()
 {
         yyparse();
-} 
+}
 
 
 
@@ -148,7 +148,8 @@ main()
      CLOSE_BRACKET = 285,
      STRING_CONCETATE = 286,
      RETURN = 287,
-     INCLUDE = 288
+     INCLUDE = 288,
+     REQUIRE = 289
    };
 #endif
 
@@ -166,7 +167,7 @@ typedef int YYSTYPE;
 
 
 /* Line 264 of yacc.c  */
-#line 170 "bison.tab.c"
+#line 171 "bison.tab.c"
 
 #ifdef short
 # undef short
@@ -384,7 +385,7 @@ union yyalloc
 #define YYLAST   57
 
 /* YYNTOKENS -- Number of terminals.  */
-#define YYNTOKENS  34
+#define YYNTOKENS  35
 /* YYNNTS -- Number of nonterminals.  */
 #define YYNNTS  15
 /* YYNRULES -- Number of rules.  */
@@ -394,7 +395,7 @@ union yyalloc
 
 /* YYTRANSLATE(YYLEX) -- Bison symbol number corresponding to YYLEX.  */
 #define YYUNDEFTOK  2
-#define YYMAXUTOK   288
+#define YYMAXUTOK   289
 
 #define YYTRANSLATE(YYX)						\
   ((unsigned int) (YYX) <= YYMAXUTOK ? yytranslate[YYX] : YYUNDEFTOK)
@@ -430,7 +431,7 @@ static const yytype_uint8 yytranslate[] =
        2,     2,     2,     2,     2,     2,     1,     2,     3,     4,
        5,     6,     7,     8,     9,    10,    11,    12,    13,    14,
       15,    16,    17,    18,    19,    20,    21,    22,    23,    24,
-      25,    26,    27,    28,    29,    30,    31,    32,    33
+      25,    26,    27,    28,    29,    30,    31,    32,    33,    34
 };
 
 #if YYDEBUG
@@ -446,15 +447,15 @@ static const yytype_uint8 yyprhs[] =
 /* YYRHS -- A `-1'-separated list of the rules' RHS.  */
 static const yytype_int8 yyrhs[] =
 {
-      35,     0,    -1,    -1,    35,    40,    -1,     6,    11,    -1,
-      -1,    36,    15,    37,    -1,    36,    -1,    11,    -1,    43,
-      -1,    36,    -1,    13,    -1,    13,    -1,    36,    -1,    42,
-      -1,    41,    -1,    43,    -1,    44,    -1,    45,    -1,    46,
-      -1,    47,    -1,    48,    -1,    27,    35,    28,    -1,     4,
-      11,    29,    37,    30,    -1,    11,    29,    37,    30,    14,
-      -1,     6,    11,    20,    38,    -1,    36,    31,    39,    -1,
-      32,    38,    -1,     9,    29,    36,    20,    12,    14,    36,
-      22,    12,    14,    36,    16,    16,    30,    -1,    33,    13,
+      36,     0,    -1,    -1,    36,    41,    -1,     6,    11,    -1,
+      -1,    37,    15,    38,    -1,    37,    -1,    11,    -1,    44,
+      -1,    37,    -1,    13,    -1,    13,    -1,    37,    -1,    43,
+      -1,    42,    -1,    44,    -1,    45,    -1,    46,    -1,    47,
+      -1,    48,    -1,    49,    -1,    27,    36,    28,    -1,     4,
+      11,    29,    38,    30,    -1,    11,    29,    38,    30,    14,
+      -1,     6,    11,    20,    39,    -1,    37,    31,    40,    -1,
+      32,    39,    -1,     9,    29,    37,    20,    12,    14,    37,
+      22,    12,    14,    37,    16,    16,    30,    -1,    33,    13,
       -1
 };
 
@@ -478,10 +479,10 @@ static const char *const yytname[] =
   "MINUS", "DIVIDE", "MULTIPLY", "ASSIGN", "MORE", "LESS", "MORE_OR_EQUAL",
   "LESS_OR_EQUAL", "EQUAL", "NOT_EQUAL", "OPEN_BLOCK", "CLOSE_BLOCK",
   "OPEN_BRACKET", "CLOSE_BRACKET", "STRING_CONCETATE", "RETURN", "INCLUDE",
-  "$accept", "commands", "variable", "arguments", "any_variable",
-  "string_variable", "command", "block", "function_declaration",
-  "function_call", "assign_value", "string_concetate", "return_value",
-  "loop_for", "include", 0
+  "REQUIRE", "$accept", "commands", "variable", "arguments",
+  "any_variable", "string_variable", "command", "block",
+  "function_declaration", "function_call", "assign_value",
+  "string_concetate", "return_value", "loop_for", "include", 0
 };
 #endif
 
@@ -493,16 +494,16 @@ static const yytype_uint16 yytoknum[] =
        0,   256,   257,   258,   259,   260,   261,   262,   263,   264,
      265,   266,   267,   268,   269,   270,   271,   272,   273,   274,
      275,   276,   277,   278,   279,   280,   281,   282,   283,   284,
-     285,   286,   287,   288
+     285,   286,   287,   288,   289
 };
 # endif
 
 /* YYR1[YYN] -- Symbol number of symbol that rule YYN derives.  */
 static const yytype_uint8 yyr1[] =
 {
-       0,    34,    35,    35,    36,    37,    37,    37,    38,    38,
-      38,    38,    39,    39,    40,    40,    40,    40,    40,    40,
-      40,    40,    41,    42,    43,    44,    45,    46,    47,    48
+       0,    35,    36,    36,    37,    38,    38,    38,    39,    39,
+      39,    39,    40,    40,    41,    41,    41,    41,    41,    41,
+      41,    41,    42,    43,    44,    45,    46,    47,    48,    49
 };
 
 /* YYR2[YYN] -- Number of symbols composing right hand side of rule YYN.  */
@@ -584,12 +585,12 @@ static const yytype_uint8 yycheck[] =
    symbol of state STATE-NUM.  */
 static const yytype_uint8 yystos[] =
 {
-       0,    35,     0,     4,     6,     9,    11,    27,    32,    33,
-      36,    40,    41,    42,    43,    44,    45,    46,    47,    48,
-      11,    11,    29,    29,    35,     6,    11,    13,    36,    38,
-      43,    13,    31,    29,    20,    36,    36,    37,    28,    11,
-      13,    36,    39,    37,    38,    20,    15,    30,    30,    12,
-      37,    14,    14,    36,    22,    12,    14,    36,    16,    16,
+       0,    36,     0,     4,     6,     9,    11,    27,    32,    33,
+      37,    41,    42,    43,    44,    45,    46,    47,    48,    49,
+      11,    11,    29,    29,    36,     6,    11,    13,    37,    39,
+      44,    13,    31,    29,    20,    37,    37,    38,    28,    11,
+      13,    37,    40,    38,    39,    20,    15,    30,    30,    12,
+      38,    14,    14,    37,    22,    12,    14,    37,    16,    16,
       30
 };
 
@@ -1467,7 +1468,7 @@ yyreduce:
 
 
 /* Line 1455 of yacc.c  */
-#line 1471 "bison.tab.c"
+#line 1472 "bison.tab.c"
       default: break;
     }
   YY_SYMBOL_PRINT ("-> $$ =", yyr1[yyn], &yyval, &yyloc);
