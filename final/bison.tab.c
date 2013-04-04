@@ -77,12 +77,6 @@ int yywrap()
 {
         return 1;
 } 
-  
-main()
-{
-        yyparse();
-}
-
 
 /* Line 371 of yacc.c  */
 #line 89 "bison.tab.c"
