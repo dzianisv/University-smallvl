@@ -9,7 +9,6 @@ int yycolumn = 0;
 %option stack
 %x SINGLE_LINE_COMMENT
 %x MULTI_LINE_COMMENT
-%x STRING_DEFINITION
 
 letter [a-zA-Z]
 digit [0-9]
@@ -21,7 +20,7 @@ digit [0-9]
 }
 
 "require"  {
-	return REQUIRE;
+		return REQUIRE;
 }
 
 "return"  {

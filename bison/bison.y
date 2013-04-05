@@ -1,118 +1,125 @@
 %{
 #include <stdio.h>
 #include <string.h>
- 
+#include  "analizator.h"
+
 void yyerror(const char *str)
 {
-        fprintf(stderr,"ошибка: %s\n",str);
+        fprintf(stderr,"Parse error: %s in %s\n",str, yytext);
 }
  
-int yywrap()
-{
-        return 1;
-} 
-
 %}
 
-%token IMPORT FUNCTION WHILE VAR_BEGIN IF ELSE FOR ARRAY_INITIALIZATION 
+%token FUNCTION WHILE VAR_BEGIN IF ELSE FOR ARRAY_INITIALIZATION 
 %token IDENTIFIER NUMBER STRING_DEFINITION END_INSTRUCTION ARG_SPLITTER 
 %token PLUS MINUS DIVIDE MULTIPLY ASSIGN MORE LESS MORE_OR_EQUAL LESS_OR_EQUAL EQUAL NOT_EQUAL
 %token OPEN_BLOCK CLOSE_BLOCK OPEN_BRACKET CLOSE_BRACKET STRING_CONCETATE RETURN INCLUDE REQUIRE
 
 %%
-commands: /* empty */
-        | commands command
+commands: command END_INSTRUCTION
+        | commands command END_INSTRUCTION
+        | commands function_declaration block
         ;	
 		
-variable:
-		VAR_BEGIN IDENTIFIER
-		;
-		
-arguments: /* empty */
-        | variable ARG_SPLITTER arguments
-		| variable
-        ;
-		
-any_variable:
-		IDENTIFIER 
-		| 
-		function_call 
-		| 
-		variable 
-		| 
-		STRING_DEFINITION
-		;
-		
-string_variable:
-		STRING_DEFINITION 
-		| 
-		variable
-		;
-
 command:
-        function_declaration
-		|
-		block
+			block
         |
-        function_call
+			function_call
 		|
-		assign_value
+			assign_value
 		|
-		string_concetate
+			string_concetate
 		|
-		return_value
+			return_value
 		|
-		loop_for
+			loop_for
 		|
-		include
-        ;
+			include
+		|
+			require
+        ;		
 		
-block: OPEN_BLOCK commands CLOSE_BLOCK;
+block: OPEN_BLOCK commands CLOSE_BLOCK 
+			{
+				printf("Logical block opened\n");
+			}
+			;
 
 function_declaration:
 		FUNCTION IDENTIFIER OPEN_BRACKET arguments CLOSE_BRACKET
         {
-                printf("функция %s\n", $2);
+                printf("Function  %s declaration\n", $2);
         }
         ;
 		
+arguments: /* empty */
+        | value ARG_SPLITTER arguments
+		| value
+        ;
+				
+value:
+			VAR_BEGIN IDENTIFIER 
+		| 
+			function_call 
+		| 
+			STRING_DEFINITION
+		|
+			NUMBER
+		;
+
+		
 function_call:
-		IDENTIFIER OPEN_BRACKET arguments CLOSE_BRACKET END_INSTRUCTION
+		IDENTIFIER OPEN_BRACKET arguments CLOSE_BRACKET
         {
-                printf("Вызов функции %s\n", $1);
+                printf("calling function %s\n", $1);
         }
         ;
 		
 assign_value:
-		VAR_BEGIN IDENTIFIER ASSIGN any_variable
+		VAR_BEGIN IDENTIFIER ASSIGN value
         {
-                printf("Присвоение значения переменной\n");
+                printf("Assignment %s = %s \n", $2, $4);
         }
         ;
 		
 string_concetate:
-		variable STRING_CONCETATE string_variable
+		value STRING_CONCETATE value
         {
-                printf("Конкатенация строк\n");
+                printf("%s concetate %s\n", $1, $3);
         }
         ;
+        
 return_value:
-		RETURN any_variable
+		RETURN value
         {
-                printf("возврат значения из функции\n");
+                printf(" return value %s from function\n", $1);
         }
         ;
 		
 loop_for:
-		FOR OPEN_BRACKET variable ASSIGN NUMBER END_INSTRUCTION variable LESS NUMBER END_INSTRUCTION variable PLUS PLUS CLOSE_BRACKET
+		FOR OPEN_BRACKET value ASSIGN NUMBER END_INSTRUCTION logical END_INSTRUCTION command CLOSE_BRACKET
 		{
-				printf("Цикл for\n");
+				printf("Cycle for for\n");
 		}
 		;
 		
 include:
-		INCLUDE STRING_DEFINITION
+		INCLUDE value
 		{
-				printf("%s", $2);
+				printf("including file %s\n", $1);
 		}
 		;
+
+require:
+		REQUIRE value
+		{
+				printf("require file %s\n", $1);
+		}
+		;
+
+logical_signs:
+
+
+logical:
+	 value logical_signs value;
+	
