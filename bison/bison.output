@@ -1,0 +1,1835 @@
+Terminals unused in grammar
+
+   DEVIDE
+
+
+State 18 conflicts: 11 shift/reduce
+
+
+Grammar
+
+    0 $accept: program $end
+
+    1 program: body
+
+    2 body: top_level_cmd
+    3     | body top_level_cmd
+
+    4 top_level_cmd: function_declaration
+    5              | include END_INSTRUCTION
+    6              | require END_INSTRUCTION
+    7              | instructions
+
+    8 instructions: instructions instruction
+    9             | instruction
+
+   10 instruction: command END_INSTRUCTION
+   11            | condition_statement
+
+   12 command: unar_op
+   13        | function_call
+   14        | assign_value
+   15        | return_value
+   16        | unset
+   17        | break
+   18        | error
+
+   19 condition_statement: loop_for
+   20                    | loop_while
+   21                    | if_stmt
+
+   22 block: OPEN_BLOCK instructions CLOSE_BLOCK
+
+   23 function_declaration: FUNCTION IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block
+   24                     | error block
+
+   25 function_declaration_arguments: /* empty */
+   26                               | var ARG_SPLITTER function_declaration_arguments
+   27                               | var
+
+   28 function_call_arguments: /* empty */
+   29                        | value ARG_SPLITTER function_call_arguments
+   30                        | value
+
+   31 value: expresion
+
+   32 explicit_value: TRUE
+   33               | FALSE
+   34               | NUMBER
+   35               | STRING_DEFINITION
+   36               | var
+   37               | function_call
+
+   38 break: BREAK
+
+   39 unar_op: var INC
+   40        | var DEC
+   41        | DEC var
+   42        | INC var
+
+   43 array: ARRAY_DECLARATION
+
+   44 var: VAR_BEGIN IDENTIFIER
+   45    | VAR_BEGIN IDENTIFIER OPEN_SQUARE_BRACKET value CLOSE_SQUARE_BRACKET
+
+   46 unset: UNSET var
+
+   47 function_call: IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET
+
+   48 assign_value: var ASSIGN value
+   49             | var ASSIGN array
+
+   50 return_value: RETURN value
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION expresion END_INSTRUCTION command CLOSE_BRACKET block
+
+   52 loop_while: WHILE OPEN_BRACKET value CLOSE_BRACKET block
+
+   53 if_stmt: IF OPEN_BRACKET value CLOSE_BRACKET block else_stmt
+
+   54 else_stmt: /* empty */
+   55          | ELSE block
+
+   56 expresion: math_expr
+   57          | expresion LESS math_expr
+   58          | expresion MORE math_expr
+   59          | expresion EQUAL math_expr
+   60          | expresion MORE_OR_EQUAL math_expr
+   61          | expresion LESS_OR_EQUAL math_expr
+   62          | expresion NOT_EQUAL math_expr
+   63          | OPEN_BRACKET expresion CLOSE_BRACKET
+   64          | error
+
+   65 math_expr: math_hight_expr
+   66          | math_expr PLUS math_hight_expr
+   67          | math_expr MINUS math_hight_expr
+
+   68 math_hight_expr: string_expr
+   69                | math_hight_expr MULTIPLY string_expr
+   70                | math_hight_expr DIVIDE string_expr
+   71                | math_hight_expr DIVIDE_MOD string_expr
+
+   72 string_expr: explicit_value
+   73            | string_expr STRING_CONCETATE explicit_value
+
+   74 include: INCLUDE value
+
+   75 require: REQUIRE value
+
+
+Terminals, with rules where they appear
+
+$end (0) 0
+error (256) 18 24 64
+FUNCTION (258) 23
+VAR_BEGIN (259) 44 45
+ARRAY_DECLARATION (260) 43
+IDENTIFIER (261) 23 44 45 47
+NUMBER (262) 34
+STRING_DEFINITION (263) 35
+END_INSTRUCTION (264) 5 6 10 51
+ARG_SPLITTER (265) 26 29
+PLUS (266) 66
+MINUS (267) 67
+DIVIDE (268) 70
+MULTIPLY (269) 69
+DIVIDE_MOD (270) 71
+ASSIGN (271) 48 49
+MORE (272) 58
+LESS (273) 57
+MORE_OR_EQUAL (274) 60
+LESS_OR_EQUAL (275) 61
+EQUAL (276) 59
+NOT_EQUAL (277) 62
+OPEN_BLOCK (278) 22
+CLOSE_BLOCK (279) 22
+OPEN_BRACKET (280) 23 47 51 52 53 63
+CLOSE_BRACKET (281) 23 47 51 52 53 63
+STRING_CONCETATE (282) 73
+RETURN (283) 50
+INCLUDE (284) 74
+REQUIRE (285) 75
+OPEN_SQUARE_BRACKET (286) 45
+CLOSE_SQUARE_BRACKET (287) 45
+IF (288) 53
+ELSE (289) 55
+TRUE (290) 32
+FALSE (291) 33
+INC (292) 39 42
+DEC (293) 40 41
+WHILE (294) 52
+FOR (295) 51
+BREAK (296) 38
+UNSET (297) 46
+DEVIDE (298)
+
+
+Nonterminals, with rules where they appear
+
+$accept (44)
+    on left: 0
+program (45)
+    on left: 1, on right: 0
+body (46)
+    on left: 2 3, on right: 1 3
+top_level_cmd (47)
+    on left: 4 5 6 7, on right: 2 3
+instructions (48)
+    on left: 8 9, on right: 7 8 22
+instruction (49)
+    on left: 10 11, on right: 8 9
+command (50)
+    on left: 12 13 14 15 16 17 18, on right: 10 51
+condition_statement (51)
+    on left: 19 20 21, on right: 11
+block (52)
+    on left: 22, on right: 23 24 51 52 53 55
+function_declaration (53)
+    on left: 23 24, on right: 4
+function_declaration_arguments (54)
+    on left: 25 26 27, on right: 23 26
+function_call_arguments (55)
+    on left: 28 29 30, on right: 29 47
+value (56)
+    on left: 31, on right: 29 30 45 48 50 52 53 74 75
+explicit_value (57)
+    on left: 32 33 34 35 36 37, on right: 72 73
+break (58)
+    on left: 38, on right: 17
+unar_op (59)
+    on left: 39 40 41 42, on right: 12
+array (60)
+    on left: 43, on right: 49
+var (61)
+    on left: 44 45, on right: 26 27 36 39 40 41 42 46 48 49
+unset (62)
+    on left: 46, on right: 16
+function_call (63)
+    on left: 47, on right: 13 37
+assign_value (64)
+    on left: 48 49, on right: 14
+return_value (65)
+    on left: 50, on right: 15
+loop_for (66)
+    on left: 51, on right: 19
+loop_while (67)
+    on left: 52, on right: 20
+if_stmt (68)
+    on left: 53, on right: 21
+else_stmt (69)
+    on left: 54 55, on right: 53
+expresion (70)
+    on left: 56 57 58 59 60 61 62 63 64, on right: 31 51 57 58 59 60
+    61 62 63
+math_expr (71)
+    on left: 65 66 67, on right: 56 57 58 59 60 61 62 66 67
+math_hight_expr (72)
+    on left: 68 69 70 71, on right: 65 66 67 69 70 71
+string_expr (73)
+    on left: 72 73, on right: 68 69 70 71 73
+include (74)
+    on left: 74, on right: 5
+require (75)
+    on left: 75, on right: 6
+
+
+State 0
+
+    0 $accept: . program $end
+
+    error       shift, and go to state 1
+    FUNCTION    shift, and go to state 2
+    VAR_BEGIN   shift, and go to state 3
+    IDENTIFIER  shift, and go to state 4
+    RETURN      shift, and go to state 5
+    INCLUDE     shift, and go to state 6
+    REQUIRE     shift, and go to state 7
+    IF          shift, and go to state 8
+    INC         shift, and go to state 9
+    DEC         shift, and go to state 10
+    WHILE       shift, and go to state 11
+    FOR         shift, and go to state 12
+    BREAK       shift, and go to state 13
+    UNSET       shift, and go to state 14
+
+    program               go to state 15
+    body                  go to state 16
+    top_level_cmd         go to state 17
+    instructions          go to state 18
+    instruction           go to state 19
+    command               go to state 20
+    condition_statement   go to state 21
+    function_declaration  go to state 22
+    break                 go to state 23
+    unar_op               go to state 24
+    var                   go to state 25
+    unset                 go to state 26
+    function_call         go to state 27
+    assign_value          go to state 28
+    return_value          go to state 29
+    loop_for              go to state 30
+    loop_while            go to state 31
+    if_stmt               go to state 32
+    include               go to state 33
+    require               go to state 34
+
+
+State 1
+
+   18 command: error .
+   24 function_declaration: error . block
+
+    OPEN_BLOCK  shift, and go to state 35
+
+    $default  reduce using rule 18 (command)
+
+    block  go to state 36
+
+
+State 2
+
+   23 function_declaration: FUNCTION . IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block
+
+    IDENTIFIER  shift, and go to state 37
+
+
+State 3
+
+   44 var: VAR_BEGIN . IDENTIFIER
+   45    | VAR_BEGIN . IDENTIFIER OPEN_SQUARE_BRACKET value CLOSE_SQUARE_BRACKET
+
+    IDENTIFIER  shift, and go to state 38
+
+
+State 4
+
+   47 function_call: IDENTIFIER . OPEN_BRACKET function_call_arguments CLOSE_BRACKET
+
+    OPEN_BRACKET  shift, and go to state 39
+
+
+State 5
+
+   50 return_value: RETURN . value
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 46
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 6
+
+   74 include: INCLUDE . value
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 54
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 7
+
+   75 require: REQUIRE . value
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 55
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 8
+
+   53 if_stmt: IF . OPEN_BRACKET value CLOSE_BRACKET block else_stmt
+
+    OPEN_BRACKET  shift, and go to state 56
+
+
+State 9
+
+   42 unar_op: INC . var
+
+    VAR_BEGIN  shift, and go to state 3
+
+    var  go to state 57
+
+
+State 10
+
+   41 unar_op: DEC . var
+
+    VAR_BEGIN  shift, and go to state 3
+
+    var  go to state 58
+
+
+State 11
+
+   52 loop_while: WHILE . OPEN_BRACKET value CLOSE_BRACKET block
+
+    OPEN_BRACKET  shift, and go to state 59
+
+
+State 12
+
+   51 loop_for: FOR . OPEN_BRACKET command END_INSTRUCTION expresion END_INSTRUCTION command CLOSE_BRACKET block
+
+    OPEN_BRACKET  shift, and go to state 60
+
+
+State 13
+
+   38 break: BREAK .
+
+    $default  reduce using rule 38 (break)
+
+
+State 14
+
+   46 unset: UNSET . var
+
+    VAR_BEGIN  shift, and go to state 3
+
+    var  go to state 61
+
+
+State 15
+
+    0 $accept: program . $end
+
+    $end  shift, and go to state 62
+
+
+State 16
+
+    1 program: body .
+    3 body: body . top_level_cmd
+
+    error       shift, and go to state 1
+    FUNCTION    shift, and go to state 2
+    VAR_BEGIN   shift, and go to state 3
+    IDENTIFIER  shift, and go to state 4
+    RETURN      shift, and go to state 5
+    INCLUDE     shift, and go to state 6
+    REQUIRE     shift, and go to state 7
+    IF          shift, and go to state 8
+    INC         shift, and go to state 9
+    DEC         shift, and go to state 10
+    WHILE       shift, and go to state 11
+    FOR         shift, and go to state 12
+    BREAK       shift, and go to state 13
+    UNSET       shift, and go to state 14
+
+    $end  reduce using rule 1 (program)
+
+    top_level_cmd         go to state 63
+    instructions          go to state 18
+    instruction           go to state 19
+    command               go to state 20
+    condition_statement   go to state 21
+    function_declaration  go to state 22
+    break                 go to state 23
+    unar_op               go to state 24
+    var                   go to state 25
+    unset                 go to state 26
+    function_call         go to state 27
+    assign_value          go to state 28
+    return_value          go to state 29
+    loop_for              go to state 30
+    loop_while            go to state 31
+    if_stmt               go to state 32
+    include               go to state 33
+    require               go to state 34
+
+
+State 17
+
+    2 body: top_level_cmd .
+
+    $default  reduce using rule 2 (body)
+
+
+State 18
+
+    7 top_level_cmd: instructions .
+    8 instructions: instructions . instruction
+
+    error       shift, and go to state 64
+    VAR_BEGIN   shift, and go to state 3
+    IDENTIFIER  shift, and go to state 4
+    RETURN      shift, and go to state 5
+    IF          shift, and go to state 8
+    INC         shift, and go to state 9
+    DEC         shift, and go to state 10
+    WHILE       shift, and go to state 11
+    FOR         shift, and go to state 12
+    BREAK       shift, and go to state 13
+    UNSET       shift, and go to state 14
+
+    $end        reduce using rule 7 (top_level_cmd)
+    error       [reduce using rule 7 (top_level_cmd)]
+    FUNCTION    reduce using rule 7 (top_level_cmd)
+    VAR_BEGIN   [reduce using rule 7 (top_level_cmd)]
+    IDENTIFIER  [reduce using rule 7 (top_level_cmd)]
+    RETURN      [reduce using rule 7 (top_level_cmd)]
+    INCLUDE     reduce using rule 7 (top_level_cmd)
+    REQUIRE     reduce using rule 7 (top_level_cmd)
+    IF          [reduce using rule 7 (top_level_cmd)]
+    INC         [reduce using rule 7 (top_level_cmd)]
+    DEC         [reduce using rule 7 (top_level_cmd)]
+    WHILE       [reduce using rule 7 (top_level_cmd)]
+    FOR         [reduce using rule 7 (top_level_cmd)]
+    BREAK       [reduce using rule 7 (top_level_cmd)]
+    UNSET       [reduce using rule 7 (top_level_cmd)]
+
+    instruction          go to state 65
+    command              go to state 20
+    condition_statement  go to state 21
+    break                go to state 23
+    unar_op              go to state 24
+    var                  go to state 25
+    unset                go to state 26
+    function_call        go to state 27
+    assign_value         go to state 28
+    return_value         go to state 29
+    loop_for             go to state 30
+    loop_while           go to state 31
+    if_stmt              go to state 32
+
+
+State 19
+
+    9 instructions: instruction .
+
+    $default  reduce using rule 9 (instructions)
+
+
+State 20
+
+   10 instruction: command . END_INSTRUCTION
+
+    END_INSTRUCTION  shift, and go to state 66
+
+
+State 21
+
+   11 instruction: condition_statement .
+
+    $default  reduce using rule 11 (instruction)
+
+
+State 22
+
+    4 top_level_cmd: function_declaration .
+
+    $default  reduce using rule 4 (top_level_cmd)
+
+
+State 23
+
+   17 command: break .
+
+    $default  reduce using rule 17 (command)
+
+
+State 24
+
+   12 command: unar_op .
+
+    $default  reduce using rule 12 (command)
+
+
+State 25
+
+   39 unar_op: var . INC
+   40        | var . DEC
+   48 assign_value: var . ASSIGN value
+   49             | var . ASSIGN array
+
+    ASSIGN  shift, and go to state 67
+    INC     shift, and go to state 68
+    DEC     shift, and go to state 69
+
+
+State 26
+
+   16 command: unset .
+
+    $default  reduce using rule 16 (command)
+
+
+State 27
+
+   13 command: function_call .
+
+    $default  reduce using rule 13 (command)
+
+
+State 28
+
+   14 command: assign_value .
+
+    $default  reduce using rule 14 (command)
+
+
+State 29
+
+   15 command: return_value .
+
+    $default  reduce using rule 15 (command)
+
+
+State 30
+
+   19 condition_statement: loop_for .
+
+    $default  reduce using rule 19 (condition_statement)
+
+
+State 31
+
+   20 condition_statement: loop_while .
+
+    $default  reduce using rule 20 (condition_statement)
+
+
+State 32
+
+   21 condition_statement: if_stmt .
+
+    $default  reduce using rule 21 (condition_statement)
+
+
+State 33
+
+    5 top_level_cmd: include . END_INSTRUCTION
+
+    END_INSTRUCTION  shift, and go to state 70
+
+
+State 34
+
+    6 top_level_cmd: require . END_INSTRUCTION
+
+    END_INSTRUCTION  shift, and go to state 71
+
+
+State 35
+
+   22 block: OPEN_BLOCK . instructions CLOSE_BLOCK
+
+    error       shift, and go to state 64
+    VAR_BEGIN   shift, and go to state 3
+    IDENTIFIER  shift, and go to state 4
+    RETURN      shift, and go to state 5
+    IF          shift, and go to state 8
+    INC         shift, and go to state 9
+    DEC         shift, and go to state 10
+    WHILE       shift, and go to state 11
+    FOR         shift, and go to state 12
+    BREAK       shift, and go to state 13
+    UNSET       shift, and go to state 14
+
+    instructions         go to state 72
+    instruction          go to state 19
+    command              go to state 20
+    condition_statement  go to state 21
+    break                go to state 23
+    unar_op              go to state 24
+    var                  go to state 25
+    unset                go to state 26
+    function_call        go to state 27
+    assign_value         go to state 28
+    return_value         go to state 29
+    loop_for             go to state 30
+    loop_while           go to state 31
+    if_stmt              go to state 32
+
+
+State 36
+
+   24 function_declaration: error block .
+
+    $default  reduce using rule 24 (function_declaration)
+
+
+State 37
+
+   23 function_declaration: FUNCTION IDENTIFIER . OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block
+
+    OPEN_BRACKET  shift, and go to state 73
+
+
+State 38
+
+   44 var: VAR_BEGIN IDENTIFIER .
+   45    | VAR_BEGIN IDENTIFIER . OPEN_SQUARE_BRACKET value CLOSE_SQUARE_BRACKET
+
+    OPEN_SQUARE_BRACKET  shift, and go to state 74
+
+    $default  reduce using rule 44 (var)
+
+
+State 39
+
+   47 function_call: IDENTIFIER OPEN_BRACKET . function_call_arguments CLOSE_BRACKET
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    CLOSE_BRACKET  reduce using rule 28 (function_call_arguments)
+
+    function_call_arguments  go to state 75
+    value                    go to state 76
+    explicit_value           go to state 47
+    var                      go to state 48
+    function_call            go to state 49
+    expresion                go to state 50
+    math_expr                go to state 51
+    math_hight_expr          go to state 52
+    string_expr              go to state 53
+
+
+State 40
+
+   64 expresion: error .
+
+    $default  reduce using rule 64 (expresion)
+
+
+State 41
+
+   34 explicit_value: NUMBER .
+
+    $default  reduce using rule 34 (explicit_value)
+
+
+State 42
+
+   35 explicit_value: STRING_DEFINITION .
+
+    $default  reduce using rule 35 (explicit_value)
+
+
+State 43
+
+   63 expresion: OPEN_BRACKET . expresion CLOSE_BRACKET
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 77
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 44
+
+   32 explicit_value: TRUE .
+
+    $default  reduce using rule 32 (explicit_value)
+
+
+State 45
+
+   33 explicit_value: FALSE .
+
+    $default  reduce using rule 33 (explicit_value)
+
+
+State 46
+
+   50 return_value: RETURN value .
+
+    $default  reduce using rule 50 (return_value)
+
+
+State 47
+
+   72 string_expr: explicit_value .
+
+    $default  reduce using rule 72 (string_expr)
+
+
+State 48
+
+   36 explicit_value: var .
+
+    $default  reduce using rule 36 (explicit_value)
+
+
+State 49
+
+   37 explicit_value: function_call .
+
+    $default  reduce using rule 37 (explicit_value)
+
+
+State 50
+
+   31 value: expresion .
+   57 expresion: expresion . LESS math_expr
+   58          | expresion . MORE math_expr
+   59          | expresion . EQUAL math_expr
+   60          | expresion . MORE_OR_EQUAL math_expr
+   61          | expresion . LESS_OR_EQUAL math_expr
+   62          | expresion . NOT_EQUAL math_expr
+
+    MORE           shift, and go to state 78
+    LESS           shift, and go to state 79
+    MORE_OR_EQUAL  shift, and go to state 80
+    LESS_OR_EQUAL  shift, and go to state 81
+    EQUAL          shift, and go to state 82
+    NOT_EQUAL      shift, and go to state 83
+
+    $default  reduce using rule 31 (value)
+
+
+State 51
+
+   56 expresion: math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 56 (expresion)
+
+
+State 52
+
+   65 math_expr: math_hight_expr .
+   69 math_hight_expr: math_hight_expr . MULTIPLY string_expr
+   70                | math_hight_expr . DIVIDE string_expr
+   71                | math_hight_expr . DIVIDE_MOD string_expr
+
+    DIVIDE      shift, and go to state 86
+    MULTIPLY    shift, and go to state 87
+    DIVIDE_MOD  shift, and go to state 88
+
+    $default  reduce using rule 65 (math_expr)
+
+
+State 53
+
+   68 math_hight_expr: string_expr .
+   73 string_expr: string_expr . STRING_CONCETATE explicit_value
+
+    STRING_CONCETATE  shift, and go to state 89
+
+    $default  reduce using rule 68 (math_hight_expr)
+
+
+State 54
+
+   74 include: INCLUDE value .
+
+    $default  reduce using rule 74 (include)
+
+
+State 55
+
+   75 require: REQUIRE value .
+
+    $default  reduce using rule 75 (require)
+
+
+State 56
+
+   53 if_stmt: IF OPEN_BRACKET . value CLOSE_BRACKET block else_stmt
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 90
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 57
+
+   42 unar_op: INC var .
+
+    $default  reduce using rule 42 (unar_op)
+
+
+State 58
+
+   41 unar_op: DEC var .
+
+    $default  reduce using rule 41 (unar_op)
+
+
+State 59
+
+   52 loop_while: WHILE OPEN_BRACKET . value CLOSE_BRACKET block
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 91
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 60
+
+   51 loop_for: FOR OPEN_BRACKET . command END_INSTRUCTION expresion END_INSTRUCTION command CLOSE_BRACKET block
+
+    error       shift, and go to state 64
+    VAR_BEGIN   shift, and go to state 3
+    IDENTIFIER  shift, and go to state 4
+    RETURN      shift, and go to state 5
+    INC         shift, and go to state 9
+    DEC         shift, and go to state 10
+    BREAK       shift, and go to state 13
+    UNSET       shift, and go to state 14
+
+    command        go to state 92
+    break          go to state 23
+    unar_op        go to state 24
+    var            go to state 25
+    unset          go to state 26
+    function_call  go to state 27
+    assign_value   go to state 28
+    return_value   go to state 29
+
+
+State 61
+
+   46 unset: UNSET var .
+
+    $default  reduce using rule 46 (unset)
+
+
+State 62
+
+    0 $accept: program $end .
+
+    $default  accept
+
+
+State 63
+
+    3 body: body top_level_cmd .
+
+    $default  reduce using rule 3 (body)
+
+
+State 64
+
+   18 command: error .
+
+    $default  reduce using rule 18 (command)
+
+
+State 65
+
+    8 instructions: instructions instruction .
+
+    $default  reduce using rule 8 (instructions)
+
+
+State 66
+
+   10 instruction: command END_INSTRUCTION .
+
+    $default  reduce using rule 10 (instruction)
+
+
+State 67
+
+   48 assign_value: var ASSIGN . value
+   49             | var ASSIGN . array
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    ARRAY_DECLARATION  shift, and go to state 93
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 94
+    explicit_value   go to state 47
+    array            go to state 95
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 68
+
+   39 unar_op: var INC .
+
+    $default  reduce using rule 39 (unar_op)
+
+
+State 69
+
+   40 unar_op: var DEC .
+
+    $default  reduce using rule 40 (unar_op)
+
+
+State 70
+
+    5 top_level_cmd: include END_INSTRUCTION .
+
+    $default  reduce using rule 5 (top_level_cmd)
+
+
+State 71
+
+    6 top_level_cmd: require END_INSTRUCTION .
+
+    $default  reduce using rule 6 (top_level_cmd)
+
+
+State 72
+
+    8 instructions: instructions . instruction
+   22 block: OPEN_BLOCK instructions . CLOSE_BLOCK
+
+    error        shift, and go to state 64
+    VAR_BEGIN    shift, and go to state 3
+    IDENTIFIER   shift, and go to state 4
+    CLOSE_BLOCK  shift, and go to state 96
+    RETURN       shift, and go to state 5
+    IF           shift, and go to state 8
+    INC          shift, and go to state 9
+    DEC          shift, and go to state 10
+    WHILE        shift, and go to state 11
+    FOR          shift, and go to state 12
+    BREAK        shift, and go to state 13
+    UNSET        shift, and go to state 14
+
+    instruction          go to state 65
+    command              go to state 20
+    condition_statement  go to state 21
+    break                go to state 23
+    unar_op              go to state 24
+    var                  go to state 25
+    unset                go to state 26
+    function_call        go to state 27
+    assign_value         go to state 28
+    return_value         go to state 29
+    loop_for             go to state 30
+    loop_while           go to state 31
+    if_stmt              go to state 32
+
+
+State 73
+
+   23 function_declaration: FUNCTION IDENTIFIER OPEN_BRACKET . function_declaration_arguments CLOSE_BRACKET block
+
+    VAR_BEGIN  shift, and go to state 3
+
+    $default  reduce using rule 25 (function_declaration_arguments)
+
+    function_declaration_arguments  go to state 97
+    var                             go to state 98
+
+
+State 74
+
+   45 var: VAR_BEGIN IDENTIFIER OPEN_SQUARE_BRACKET . value CLOSE_SQUARE_BRACKET
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    value            go to state 99
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 50
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 75
+
+   47 function_call: IDENTIFIER OPEN_BRACKET function_call_arguments . CLOSE_BRACKET
+
+    CLOSE_BRACKET  shift, and go to state 100
+
+
+State 76
+
+   29 function_call_arguments: value . ARG_SPLITTER function_call_arguments
+   30                        | value .
+
+    ARG_SPLITTER  shift, and go to state 101
+
+    $default  reduce using rule 30 (function_call_arguments)
+
+
+State 77
+
+   57 expresion: expresion . LESS math_expr
+   58          | expresion . MORE math_expr
+   59          | expresion . EQUAL math_expr
+   60          | expresion . MORE_OR_EQUAL math_expr
+   61          | expresion . LESS_OR_EQUAL math_expr
+   62          | expresion . NOT_EQUAL math_expr
+   63          | OPEN_BRACKET expresion . CLOSE_BRACKET
+
+    MORE           shift, and go to state 78
+    LESS           shift, and go to state 79
+    MORE_OR_EQUAL  shift, and go to state 80
+    LESS_OR_EQUAL  shift, and go to state 81
+    EQUAL          shift, and go to state 82
+    NOT_EQUAL      shift, and go to state 83
+    CLOSE_BRACKET  shift, and go to state 102
+
+
+State 78
+
+   58 expresion: expresion MORE . math_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_expr        go to state 103
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 79
+
+   57 expresion: expresion LESS . math_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_expr        go to state 104
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 80
+
+   60 expresion: expresion MORE_OR_EQUAL . math_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_expr        go to state 105
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 81
+
+   61 expresion: expresion LESS_OR_EQUAL . math_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_expr        go to state 106
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 82
+
+   59 expresion: expresion EQUAL . math_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_expr        go to state 107
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 83
+
+   62 expresion: expresion NOT_EQUAL . math_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_expr        go to state 108
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 84
+
+   66 math_expr: math_expr PLUS . math_hight_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_hight_expr  go to state 109
+    string_expr      go to state 53
+
+
+State 85
+
+   67 math_expr: math_expr MINUS . math_hight_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    math_hight_expr  go to state 110
+    string_expr      go to state 53
+
+
+State 86
+
+   70 math_hight_expr: math_hight_expr DIVIDE . string_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value  go to state 47
+    var             go to state 48
+    function_call   go to state 49
+    string_expr     go to state 111
+
+
+State 87
+
+   69 math_hight_expr: math_hight_expr MULTIPLY . string_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value  go to state 47
+    var             go to state 48
+    function_call   go to state 49
+    string_expr     go to state 112
+
+
+State 88
+
+   71 math_hight_expr: math_hight_expr DIVIDE_MOD . string_expr
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value  go to state 47
+    var             go to state 48
+    function_call   go to state 49
+    string_expr     go to state 113
+
+
+State 89
+
+   73 string_expr: string_expr STRING_CONCETATE . explicit_value
+
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value  go to state 114
+    var             go to state 48
+    function_call   go to state 49
+
+
+State 90
+
+   53 if_stmt: IF OPEN_BRACKET value . CLOSE_BRACKET block else_stmt
+
+    CLOSE_BRACKET  shift, and go to state 115
+
+
+State 91
+
+   52 loop_while: WHILE OPEN_BRACKET value . CLOSE_BRACKET block
+
+    CLOSE_BRACKET  shift, and go to state 116
+
+
+State 92
+
+   51 loop_for: FOR OPEN_BRACKET command . END_INSTRUCTION expresion END_INSTRUCTION command CLOSE_BRACKET block
+
+    END_INSTRUCTION  shift, and go to state 117
+
+
+State 93
+
+   43 array: ARRAY_DECLARATION .
+
+    $default  reduce using rule 43 (array)
+
+
+State 94
+
+   48 assign_value: var ASSIGN value .
+
+    $default  reduce using rule 48 (assign_value)
+
+
+State 95
+
+   49 assign_value: var ASSIGN array .
+
+    $default  reduce using rule 49 (assign_value)
+
+
+State 96
+
+   22 block: OPEN_BLOCK instructions CLOSE_BLOCK .
+
+    $default  reduce using rule 22 (block)
+
+
+State 97
+
+   23 function_declaration: FUNCTION IDENTIFIER OPEN_BRACKET function_declaration_arguments . CLOSE_BRACKET block
+
+    CLOSE_BRACKET  shift, and go to state 118
+
+
+State 98
+
+   26 function_declaration_arguments: var . ARG_SPLITTER function_declaration_arguments
+   27                               | var .
+
+    ARG_SPLITTER  shift, and go to state 119
+
+    $default  reduce using rule 27 (function_declaration_arguments)
+
+
+State 99
+
+   45 var: VAR_BEGIN IDENTIFIER OPEN_SQUARE_BRACKET value . CLOSE_SQUARE_BRACKET
+
+    CLOSE_SQUARE_BRACKET  shift, and go to state 120
+
+
+State 100
+
+   47 function_call: IDENTIFIER OPEN_BRACKET function_call_arguments CLOSE_BRACKET .
+
+    $default  reduce using rule 47 (function_call)
+
+
+State 101
+
+   29 function_call_arguments: value ARG_SPLITTER . function_call_arguments
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    CLOSE_BRACKET  reduce using rule 28 (function_call_arguments)
+
+    function_call_arguments  go to state 121
+    value                    go to state 76
+    explicit_value           go to state 47
+    var                      go to state 48
+    function_call            go to state 49
+    expresion                go to state 50
+    math_expr                go to state 51
+    math_hight_expr          go to state 52
+    string_expr              go to state 53
+
+
+State 102
+
+   63 expresion: OPEN_BRACKET expresion CLOSE_BRACKET .
+
+    $default  reduce using rule 63 (expresion)
+
+
+State 103
+
+   58 expresion: expresion MORE math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 58 (expresion)
+
+
+State 104
+
+   57 expresion: expresion LESS math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 57 (expresion)
+
+
+State 105
+
+   60 expresion: expresion MORE_OR_EQUAL math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 60 (expresion)
+
+
+State 106
+
+   61 expresion: expresion LESS_OR_EQUAL math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 61 (expresion)
+
+
+State 107
+
+   59 expresion: expresion EQUAL math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 59 (expresion)
+
+
+State 108
+
+   62 expresion: expresion NOT_EQUAL math_expr .
+   66 math_expr: math_expr . PLUS math_hight_expr
+   67          | math_expr . MINUS math_hight_expr
+
+    PLUS   shift, and go to state 84
+    MINUS  shift, and go to state 85
+
+    $default  reduce using rule 62 (expresion)
+
+
+State 109
+
+   66 math_expr: math_expr PLUS math_hight_expr .
+   69 math_hight_expr: math_hight_expr . MULTIPLY string_expr
+   70                | math_hight_expr . DIVIDE string_expr
+   71                | math_hight_expr . DIVIDE_MOD string_expr
+
+    DIVIDE      shift, and go to state 86
+    MULTIPLY    shift, and go to state 87
+    DIVIDE_MOD  shift, and go to state 88
+
+    $default  reduce using rule 66 (math_expr)
+
+
+State 110
+
+   67 math_expr: math_expr MINUS math_hight_expr .
+   69 math_hight_expr: math_hight_expr . MULTIPLY string_expr
+   70                | math_hight_expr . DIVIDE string_expr
+   71                | math_hight_expr . DIVIDE_MOD string_expr
+
+    DIVIDE      shift, and go to state 86
+    MULTIPLY    shift, and go to state 87
+    DIVIDE_MOD  shift, and go to state 88
+
+    $default  reduce using rule 67 (math_expr)
+
+
+State 111
+
+   70 math_hight_expr: math_hight_expr DIVIDE string_expr .
+   73 string_expr: string_expr . STRING_CONCETATE explicit_value
+
+    STRING_CONCETATE  shift, and go to state 89
+
+    $default  reduce using rule 70 (math_hight_expr)
+
+
+State 112
+
+   69 math_hight_expr: math_hight_expr MULTIPLY string_expr .
+   73 string_expr: string_expr . STRING_CONCETATE explicit_value
+
+    STRING_CONCETATE  shift, and go to state 89
+
+    $default  reduce using rule 69 (math_hight_expr)
+
+
+State 113
+
+   71 math_hight_expr: math_hight_expr DIVIDE_MOD string_expr .
+   73 string_expr: string_expr . STRING_CONCETATE explicit_value
+
+    STRING_CONCETATE  shift, and go to state 89
+
+    $default  reduce using rule 71 (math_hight_expr)
+
+
+State 114
+
+   73 string_expr: string_expr STRING_CONCETATE explicit_value .
+
+    $default  reduce using rule 73 (string_expr)
+
+
+State 115
+
+   53 if_stmt: IF OPEN_BRACKET value CLOSE_BRACKET . block else_stmt
+
+    OPEN_BLOCK  shift, and go to state 35
+
+    block  go to state 122
+
+
+State 116
+
+   52 loop_while: WHILE OPEN_BRACKET value CLOSE_BRACKET . block
+
+    OPEN_BLOCK  shift, and go to state 35
+
+    block  go to state 123
+
+
+State 117
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION . expresion END_INSTRUCTION command CLOSE_BRACKET block
+
+    error              shift, and go to state 40
+    VAR_BEGIN          shift, and go to state 3
+    IDENTIFIER         shift, and go to state 4
+    NUMBER             shift, and go to state 41
+    STRING_DEFINITION  shift, and go to state 42
+    OPEN_BRACKET       shift, and go to state 43
+    TRUE               shift, and go to state 44
+    FALSE              shift, and go to state 45
+
+    explicit_value   go to state 47
+    var              go to state 48
+    function_call    go to state 49
+    expresion        go to state 124
+    math_expr        go to state 51
+    math_hight_expr  go to state 52
+    string_expr      go to state 53
+
+
+State 118
+
+   23 function_declaration: FUNCTION IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET . block
+
+    OPEN_BLOCK  shift, and go to state 35
+
+    block  go to state 125
+
+
+State 119
+
+   26 function_declaration_arguments: var ARG_SPLITTER . function_declaration_arguments
+
+    VAR_BEGIN  shift, and go to state 3
+
+    $default  reduce using rule 25 (function_declaration_arguments)
+
+    function_declaration_arguments  go to state 126
+    var                             go to state 98
+
+
+State 120
+
+   45 var: VAR_BEGIN IDENTIFIER OPEN_SQUARE_BRACKET value CLOSE_SQUARE_BRACKET .
+
+    $default  reduce using rule 45 (var)
+
+
+State 121
+
+   29 function_call_arguments: value ARG_SPLITTER function_call_arguments .
+
+    $default  reduce using rule 29 (function_call_arguments)
+
+
+State 122
+
+   53 if_stmt: IF OPEN_BRACKET value CLOSE_BRACKET block . else_stmt
+
+    ELSE  shift, and go to state 127
+
+    $default  reduce using rule 54 (else_stmt)
+
+    else_stmt  go to state 128
+
+
+State 123
+
+   52 loop_while: WHILE OPEN_BRACKET value CLOSE_BRACKET block .
+
+    $default  reduce using rule 52 (loop_while)
+
+
+State 124
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION expresion . END_INSTRUCTION command CLOSE_BRACKET block
+   57 expresion: expresion . LESS math_expr
+   58          | expresion . MORE math_expr
+   59          | expresion . EQUAL math_expr
+   60          | expresion . MORE_OR_EQUAL math_expr
+   61          | expresion . LESS_OR_EQUAL math_expr
+   62          | expresion . NOT_EQUAL math_expr
+
+    END_INSTRUCTION  shift, and go to state 129
+    MORE             shift, and go to state 78
+    LESS             shift, and go to state 79
+    MORE_OR_EQUAL    shift, and go to state 80
+    LESS_OR_EQUAL    shift, and go to state 81
+    EQUAL            shift, and go to state 82
+    NOT_EQUAL        shift, and go to state 83
+
+
+State 125
+
+   23 function_declaration: FUNCTION IDENTIFIER OPEN_BRACKET function_declaration_arguments CLOSE_BRACKET block .
+
+    $default  reduce using rule 23 (function_declaration)
+
+
+State 126
+
+   26 function_declaration_arguments: var ARG_SPLITTER function_declaration_arguments .
+
+    $default  reduce using rule 26 (function_declaration_arguments)
+
+
+State 127
+
+   55 else_stmt: ELSE . block
+
+    OPEN_BLOCK  shift, and go to state 35
+
+    block  go to state 130
+
+
+State 128
+
+   53 if_stmt: IF OPEN_BRACKET value CLOSE_BRACKET block else_stmt .
+
+    $default  reduce using rule 53 (if_stmt)
+
+
+State 129
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION expresion END_INSTRUCTION . command CLOSE_BRACKET block
+
+    error       shift, and go to state 64
+    VAR_BEGIN   shift, and go to state 3
+    IDENTIFIER  shift, and go to state 4
+    RETURN      shift, and go to state 5
+    INC         shift, and go to state 9
+    DEC         shift, and go to state 10
+    BREAK       shift, and go to state 13
+    UNSET       shift, and go to state 14
+
+    command        go to state 131
+    break          go to state 23
+    unar_op        go to state 24
+    var            go to state 25
+    unset          go to state 26
+    function_call  go to state 27
+    assign_value   go to state 28
+    return_value   go to state 29
+
+
+State 130
+
+   55 else_stmt: ELSE block .
+
+    $default  reduce using rule 55 (else_stmt)
+
+
+State 131
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION expresion END_INSTRUCTION command . CLOSE_BRACKET block
+
+    CLOSE_BRACKET  shift, and go to state 132
+
+
+State 132
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION expresion END_INSTRUCTION command CLOSE_BRACKET . block
+
+    OPEN_BLOCK  shift, and go to state 35
+
+    block  go to state 133
+
+
+State 133
+
+   51 loop_for: FOR OPEN_BRACKET command END_INSTRUCTION expresion END_INSTRUCTION command CLOSE_BRACKET block .
+
+    $default  reduce using rule 51 (loop_for)

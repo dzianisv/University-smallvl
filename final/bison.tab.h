@@ -34,7 +34,7 @@
 # define YY_YY_BISON_TAB_H_INCLUDED
 /* Enabling traces.  */
 #ifndef YYDEBUG
-# define YYDEBUG 0
+# define YYDEBUG 1
 #endif
 #if YYDEBUG
 extern int yydebug;
@@ -47,43 +47,52 @@ extern int yydebug;
       know about them.  */
    enum yytokentype {
      FUNCTION = 258,
-     WHILE = 259,
-     VAR_BEGIN = 260,
-     IF = 261,
-     ELSE = 262,
-     FOR = 263,
-     ARRAY_INITIALIZATION = 264,
-     IDENTIFIER = 265,
-     NUMBER = 266,
-     STRING_DEFINITION = 267,
-     END_INSTRUCTION = 268,
-     ARG_SPLITTER = 269,
-     PLUS = 270,
-     MINUS = 271,
-     DIVIDE = 272,
-     MULTIPLY = 273,
-     ASSIGN = 274,
-     MORE = 275,
-     LESS = 276,
-     MORE_OR_EQUAL = 277,
-     LESS_OR_EQUAL = 278,
-     EQUAL = 279,
-     NOT_EQUAL = 280,
-     OPEN_BLOCK = 281,
-     CLOSE_BLOCK = 282,
-     OPEN_BRACKET = 283,
-     CLOSE_BRACKET = 284,
-     STRING_CONCETATE = 285,
-     RETURN = 286,
-     INCLUDE = 287,
-     REQUIRE = 288
+     VAR_BEGIN = 259,
+     ARRAY_DECLARATION = 260,
+     IDENTIFIER = 261,
+     NUMBER = 262,
+     STRING_DEFINITION = 263,
+     END_INSTRUCTION = 264,
+     ARG_SPLITTER = 265,
+     PLUS = 266,
+     MINUS = 267,
+     DIVIDE = 268,
+     MULTIPLY = 269,
+     DIVIDE_MOD = 270,
+     ASSIGN = 271,
+     MORE = 272,
+     LESS = 273,
+     MORE_OR_EQUAL = 274,
+     LESS_OR_EQUAL = 275,
+     EQUAL = 276,
+     NOT_EQUAL = 277,
+     OPEN_BLOCK = 278,
+     CLOSE_BLOCK = 279,
+     OPEN_BRACKET = 280,
+     CLOSE_BRACKET = 281,
+     STRING_CONCETATE = 282,
+     RETURN = 283,
+     INCLUDE = 284,
+     REQUIRE = 285,
+     OPEN_SQUARE_BRACKET = 286,
+     CLOSE_SQUARE_BRACKET = 287,
+     IF = 288,
+     ELSE = 289,
+     TRUE = 290,
+     FALSE = 291,
+     INC = 292,
+     DEC = 293,
+     WHILE = 294,
+     FOR = 295,
+     BREAK = 296,
+     UNSET = 297,
+     DEVIDE = 298
    };
 #endif
 
 
 #if ! defined YYSTYPE && ! defined YYSTYPE_IS_DECLARED
-typedef int YYSTYPE;
-# define YYSTYPE_IS_TRIVIAL 1
+
 # define yystype YYSTYPE /* obsolescent; will be withdrawn */
 # define YYSTYPE_IS_DECLARED 1
 #endif
